@@ -1,8 +1,8 @@
 /*
  * @Author: superJavan
  * @Date: 2023-12-15 11:53:47
- * @LastEditors: superJavan
- * @LastEditTime: 2023-12-18 17:09:45
+ * @LastEditors: super_javan 296652579@qq.com
+ * @LastEditTime: 2023-12-18 20:53:33
  * @Description: 
  * @FilePath: \BattleFlagGameStude\assets\scripts\ViewMgr.ts
  */
@@ -33,8 +33,8 @@ export class ViewMgr {
     private _views: Map<string, ViewInfo>;
 
     constructor() {
-        this.canvasTf = find("Canvas");
-        this.worldCanvasTf = find("WorldCanvas");
+        this.canvasTf = find("Canvas/Root");
+        this.worldCanvasTf = find("Canvas/WorldRoot");
 
         this._opens = new Map<string, IBaseView>();
         this._viewCaches = new Map<string, IBaseView>();
@@ -101,9 +101,7 @@ export class ViewMgr {
             const type: string = key.toString();
             let prefabNode: Node = await this.resourceLoad(`prefabs/${viewInfo?.PrefabName}`);
             let ParentTf: Node = viewInfo.ParentTf;
-            // prefabNode.parent = ParentTf;
-            ParentTf.addChild(prefabNode);
-            prefabNode.setPosition(Vec3.ZERO);
+            prefabNode.parent = ParentTf;
             view = prefabNode.addComponent(type);
             view.ViewId = key;
             view.controller = viewInfo?.controller;
