@@ -1,8 +1,8 @@
 /*
  * @Author: superJavan
  * @Date: 2023-12-16 16:33:41
- * @LastEditors: superJavan
- * @LastEditTime: 2023-12-18 10:01:46
+ * @LastEditors: super_javan 296652579@qq.com
+ * @LastEditTime: 2023-12-19 21:04:19
  * @Description: 
  * @FilePath: \BattleFlagGameStude\assets\scripts\Module\GameUIController.ts
  */
@@ -24,6 +24,12 @@ export class GameUIController extends BaseController {
             this
         ))
 
+        GameApp.Instance._ViewMgr.Register(ViewType.SetView, new ViewInfo(
+            'SetView',
+            GameApp.Instance._ViewMgr.canvasTf,
+            this
+        ))
+
         this.InitModuleEvent();
     }
 
@@ -33,9 +39,14 @@ export class GameUIController extends BaseController {
 
     public override InitModuleEvent(): void {
         this.RegisterFunc(Defines.OpenStartView, this.openStartView);
+        this.RegisterFunc(Defines.OpenSetView, this.openSetView);
     }
 
     private openStartView(...args: any[]) {
         GameApp.Instance._ViewMgr.Open(ViewType.StartView, args);
+    }
+
+    private openSetView(...args: any[]) {
+        GameApp.Instance._ViewMgr.Open(ViewType.SetView, args);
     }
 }

@@ -1,8 +1,8 @@
 /*
  * @Author: superJavan
  * @Date: 2023-12-14 14:03:11
- * @LastEditors: superJavan
- * @LastEditTime: 2023-12-16 17:50:15
+ * @LastEditors: super_javan 296652579@qq.com
+ * @LastEditTime: 2023-12-19 22:00:50
  * @Description: 控制管理器
  * @FilePath: \BattleFlagGameStude\assets\scripts\ControllerMgr.ts
  */
@@ -51,7 +51,7 @@ export class ControllerMgr {
         for (const key of this._modules.keys()) {
             let controller = this._modules.get(key);
             if (controller)
-                controller.Destroy();
+                controller.Destory();
 
             this._modules.delete(key);
         }

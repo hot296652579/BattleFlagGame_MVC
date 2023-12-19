@@ -2,7 +2,7 @@
  * @Author: superJavan
  * @Date: 2023-12-15 11:53:47
  * @LastEditors: super_javan 296652579@qq.com
- * @LastEditTime: 2023-12-18 20:53:33
+ * @LastEditTime: 2023-12-19 22:03:05
  * @Description: 
  * @FilePath: \BattleFlagGameStude\assets\scripts\ViewMgr.ts
  */
@@ -28,17 +28,17 @@ export class ViewMgr {
     public canvasTf: Node | undefined;
     public worldCanvasTf: Node | undefined;
 
-    private _opens: Map<string, IBaseView>;
-    private _viewCaches: Map<string, IBaseView>;
-    private _views: Map<string, ViewInfo>;
+    private _opens: Map<ViewType, IBaseView>;
+    private _viewCaches: Map<ViewType, IBaseView>;
+    private _views: Map<ViewType, ViewInfo>;
 
     constructor() {
         this.canvasTf = find("Canvas/Root");
         this.worldCanvasTf = find("Canvas/WorldRoot");
 
-        this._opens = new Map<string, IBaseView>();
-        this._viewCaches = new Map<string, IBaseView>();
-        this._views = new Map<string, ViewInfo>();
+        this._opens = new Map<ViewType, IBaseView>();
+        this._viewCaches = new Map<ViewType, IBaseView>();
+        this._views = new Map<ViewType, ViewInfo>();
     }
 
     //注册视图
@@ -104,13 +104,13 @@ export class ViewMgr {
             prefabNode.parent = ParentTf;
             view = prefabNode.addComponent(type);
             view.ViewId = key;
-            view.controller = viewInfo?.controller;
+            view.Controller = viewInfo?.controller;
             //添加到视图缓存
             this._viewCaches.set(key, view);
             viewInfo?.controller.OnLoadView(view);
         }
 
-        if (!this._opens.has(key))
+        if (this._opens.has(key))
             return
 
         this._opens.set(key, view);
@@ -141,7 +141,7 @@ export class ViewMgr {
         return this._opens.has(key);
     }
 
-    public close(key: ViewType, ...args: any[]): void {
+    public Close(key: ViewType, ...args: any[]): void {
         //没有打开
         if (!this.IsOpen(key)) {
             return;
@@ -152,6 +152,15 @@ export class ViewMgr {
             this._opens.delete(key);
             view.Close(args);
             this._views.get(key)?.controller.CloseView(view);
+        }
+    }
+
+    public Destory(key: ViewType): void {
+        const oldView = this.GetView(key);
+        if (oldView != null) {
+            this.UnRegister(key);
+            oldView.DestroyView();
+            this._viewCaches.delete(key);
         }
     }
 }

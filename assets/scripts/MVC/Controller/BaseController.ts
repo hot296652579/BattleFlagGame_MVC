@@ -1,8 +1,8 @@
 /*
  * @Author: superJavan
  * @Date: 2023-12-13 16:00:14
- * @LastEditors: superJavan
- * @LastEditTime: 2023-12-16 11:23:29
+ * @LastEditors: super_javan 296652579@qq.com
+ * @LastEditTime: 2023-12-19 22:00:17
  * @Description: 控制器基类
  * @FilePath: \BattleFlagGameStude\assets\scripts\MVC\Controller\BaseController.ts
  */
@@ -34,7 +34,7 @@ export class BaseController {
     public CloseView(view: IBaseView) {
     }
 
-    public Destroy() {
+    public Destory() {
         this.RemoveMuduleEvent();
         this.RemoveGlobalEvent();
     }

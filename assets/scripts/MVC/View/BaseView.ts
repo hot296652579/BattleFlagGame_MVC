@@ -1,35 +1,34 @@
 /*
  * @Author: superJavan
  * @Date: 2023-12-13 17:10:28
- * @LastEditors: superJavan
- * @LastEditTime: 2023-12-18 17:12:28
+ * @LastEditors: super_javan 296652579@qq.com
+ * @LastEditTime: 2023-12-19 22:19:23
  * @Description:视图基类
  * @FilePath: \BattleFlagGameStude\assets\scripts\MVC\View\BaseView.ts
  */
 import { IBaseView } from "./IBaseView";
 import { BaseController } from "../Controller/BaseController";
 import { _decorator, Component, Node, Canvas } from 'cc';
+import { ViewType } from "../../ViewType";
 const { ccclass, property } = _decorator;
 
 @ccclass('BaseView')
 export class BaseView extends Component implements IBaseView {
     @property
-    BaseController?: BaseController;
+    Controller: BaseController = null!;
 
     @property
-    ViewId: number = 0;
+    ViewId: ViewType = null!;
 
-    public Controller: BaseController = null;
     protected mCachesGos: Map<string, Node> = new Map<string, Node>(); // Cache objects map
     private _isInit: boolean = false;
 
-    onLoad() {
-        this.onInit();
+    start(): void {
+        this.onStart();
     }
 
-    onInit() {
-        this._isInit = true;
-        // Initialization code here
+    protected onStart() {
+
     }
 
     public ApplyControllerFunc(controllerKey: number, eventName: string, ...args: any[]): void {
@@ -44,8 +43,10 @@ export class BaseView extends Component implements IBaseView {
     IsShow(): boolean {
         return this.node.active
     }
-    InitData() {
 
+    InitData() {
+        this._isInit = true;
+        // Initialization code here
     }
 
     public Close(...args: any[]): void {
@@ -72,6 +73,12 @@ export class BaseView extends Component implements IBaseView {
         this.node.active = value;
     }
 
+    /**
+     * @description: 触发本视图控制器事件
+     * @param {string} eventName
+     * @param {function} args
+     * @return
+     */
     public ApplyFunc(eventName: string, ...args: any[]): void {
         if (this.Controller) {
             this.Controller.ApplyFunc(eventName, args);

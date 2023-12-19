@@ -525,7 +525,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "btnStart",
+    "_name": "startBtn",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
@@ -913,7 +913,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "btnSet",
+    "_name": "setBtn",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
