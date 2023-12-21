@@ -1,8 +1,8 @@
 /*
  * @Author: superJavan
  * @Date: 2023-12-13 17:10:28
- * @LastEditors: super_javan 296652579@qq.com
- * @LastEditTime: 2023-12-19 22:19:23
+ * @LastEditors: superJavan
+ * @LastEditTime: 2023-12-21 15:55:05
  * @Description:视图基类
  * @FilePath: \BattleFlagGameStude\assets\scripts\MVC\View\BaseView.ts
  */
@@ -28,7 +28,7 @@ export class BaseView extends Component implements IBaseView {
     }
 
     protected onStart() {
-
+        this.InitUI();
     }
 
     public ApplyControllerFunc(controllerKey: number, eventName: string, ...args: any[]): void {

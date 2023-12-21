@@ -2,7 +2,7 @@
  * @Author: superJavan
  * @Date: 2023-12-13 15:57:28
  * @LastEditors: superJavan
- * @LastEditTime: 2023-12-16 17:01:33
+ * @LastEditTime: 2023-12-21 16:04:24
  * @Description: 
  * @FilePath: \BattleFlagGameStude\assets\scripts\GameScene.ts
  */
@@ -11,6 +11,7 @@ import { GameApp } from './GameApp';
 import { ControllerType } from './ControllerType';
 import { GameUIController } from './Module/GameUIController';
 import { GameController } from './Module/Game/GameController';
+import { LoadingController } from './Module/Loading/LoadingController';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameScene')
@@ -25,6 +26,7 @@ export class GameScene extends Component {
     private RegisterModule() {
         GameApp.Instance._ControllerMgr.Register(ControllerType.GameUI, new GameUIController());
         GameApp.Instance._ControllerMgr.Register(ControllerType.Game, new GameController());
+        GameApp.Instance._ControllerMgr.Register(ControllerType.Loading, new LoadingController());
     }
 
     private InitModule() {

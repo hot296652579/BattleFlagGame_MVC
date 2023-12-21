@@ -1,9 +1,9 @@
 /*
  * @Author: super_javan 296652579@qq.com
  * @Date: 2023-12-18 20:37:25
- * @LastEditors: super_javan 296652579@qq.com
- * @LastEditTime: 2023-12-20 22:49:40
- * @FilePath: /BattleFlagGame_MVC/assets/scripts/Module/GameUI/StartView.ts
+ * @LastEditors: superJavan
+ * @LastEditTime: 2023-12-21 16:07:55
+ * @FilePath: \BattleFlagGameStude\assets\scripts\Module\GameUI\StartView.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import { _decorator, Button, Component, Node } from 'cc';
@@ -18,7 +18,7 @@ const { ccclass, property } = _decorator;
 @ccclass('StartView')
 export class StartView extends BaseView {
 
-    onStart(): void {
+    InitUI(): void {
         this.Find('startBtn').on(Button.EventType.CLICK, this.onClickStartBtn, this);
         this.Find('setBtn').on(Button.EventType.CLICK, this.onClickSetBtn, this);
     }
@@ -27,9 +27,8 @@ export class StartView extends BaseView {
         GameApp.Instance._ViewMgr.Close(this.ViewId);
         let loadingModel: LoadingModel = new LoadingModel(new LoadingController());
         loadingModel.SceneName = "Map";
-
-        loadingModel.callback = () => {
-            console.log('场景加载完成后的 callback');
+        loadingModel.callback = (args: any) => {
+            console.log('startView界面 callback()执行 args:', args);
         }
 
         this.Controller.ApplyControllerFunc(ControllerType.Loading, Defines.OpenLoadingView, loadingModel);
