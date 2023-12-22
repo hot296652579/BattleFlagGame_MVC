@@ -1,8 +1,8 @@
 /*
  * @Author: superJavan
  * @Date: 2023-12-15 11:53:47
- * @LastEditors: super_javan 296652579@qq.com
- * @LastEditTime: 2023-12-19 22:03:05
+ * @LastEditors: superJavan
+ * @LastEditTime: 2023-12-22 14:32:40
  * @Description: 
  * @FilePath: \BattleFlagGameStude\assets\scripts\ViewMgr.ts
  */
@@ -114,6 +114,8 @@ export class ViewMgr {
             return
 
         this._opens.set(key, view);
+        console.log('需要打开的界面key:' + key);
+        console.log('打开的界面:', this._opens);
         //已经初始化
         if (view.IsInit()) {
             view.SetVisible(true);
@@ -138,6 +140,7 @@ export class ViewMgr {
     }
 
     public IsOpen(key: ViewType): boolean {
+        console.log(`需要关闭的界面key:${key} 打开的界面有:`, this._opens);
         return this._opens.has(key);
     }
 
